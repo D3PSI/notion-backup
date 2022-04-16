@@ -7,7 +7,7 @@ let axios = require('axios')
   , { createWriteStream, mkdirSync, rmdirSync } = require('fs')
   , { join } = require('path')
   , notionAPI = 'https://www.notion.so/api/v3'
-  , { NOTION_TOKEN, NOTION_SPACE_ID } = process.env
+  , { NOTION_TOKEN, NOTION_ID, NOTION_SPACE_ID } = process.env
   , client = axios.create({
       baseURL: notionAPI,
       headers: {
@@ -41,12 +41,15 @@ async function exportFromNotion (format) {
   try {
     let { data: { taskId } } = await post('enqueueTask', {
       task: {
-        eventName: 'exportSpace',
+        eventName: 'exportBlock',
         request: {
-          spaceId: NOTION_SPACE_ID,
+          block: {
+            id: NOTION_ID,
+            spaceId: NOTION_SPACE_ID
+          },
           exportOptions: {
             exportType: format,
-            timeZone: 'America/New_York',
+            timeZone: 'Europe/Zurich',
             locale: 'en',
           },
         },
