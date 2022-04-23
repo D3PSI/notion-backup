@@ -20,8 +20,8 @@ let axios = require('axios')
     }
 ;
 
-if (!NOTION_TOKEN || !NOTION_SPACE_ID) {
-    die(`Need to have both NOTION_TOKEN and NOTION_SPACE_ID defined in the environment.
+if (!NOTION_TOKEN || !NOTION_ID || !NOTION_SPACE_ID) {
+    die(`Need to have all of NOTION_TOKEN, NOTION_ID and NOTION_SPACE_ID defined in the environment.
 See https://medium.com/@arturburtsev/automated-notion-backups-f6af4edc298d for
 notes on how to get that information.`);
 }
